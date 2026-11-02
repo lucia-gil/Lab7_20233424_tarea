@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Fragmentos</title>
+</head>
+<body>
+<nav th:fragment="menu" class="navbar navbar-expand navbar-dark bg-dark px-3">
+    <a class="navbar-brand" th:href="@{/}">Portal comercial</a>
+    <div class="navbar-nav">
+        <a class="nav-link" th:href="@{/}">Inicio</a>
+        <a class="nav-link" th:href="@{/customer}">Clientes</a>
+        <a class="nav-link" th:href="@{/product}">Catálogo</a>
+        <a class="nav-link" th:href="@{/invoice}">Pedidos</a>
+    </div>
+</nav>
+</body>
+</html>
