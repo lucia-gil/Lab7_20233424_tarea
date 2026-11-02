@@ -1,0 +1,51 @@
+:root {
+    --rosa: #d63384;
+    --rosa-oscuro: #ad1f6b;
+    --rosa-claro: #fde4ef;
+}
+
+body {
+    background-color: #fff5f9;
+}
+
+h1, h5 {
+    color: var(--rosa-oscuro);
+}
+
+.navbar-rosa {
+    background-color: var(--rosa);
+}
+
+.navbar-rosa .navbar-brand,
+.navbar-rosa .nav-link {
+    color: #ffffff;
+}
+
+.navbar-rosa .nav-link:hover {
+    color: var(--rosa-claro);
+}
+
+.btn-primary {
+    background-color: var(--rosa);
+    border-color: var(--rosa);
+}
+
+.btn-primary:hover {
+    background-color: var(--rosa-oscuro);
+    border-color: var(--rosa-oscuro);
+}
+
+.card {
+    border-color: var(--rosa-claro);
+}
+
+.table thead th {
+    background-color: var(--rosa-claro);
+    color: var(--rosa-oscuro);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--rosa);
+    box-shadow: 0 0 0 0.25rem rgba(214, 51, 132, 0.25);
+}
