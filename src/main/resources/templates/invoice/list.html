@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Pedidos</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}"/>
+</head>
+<body>
+<nav th:replace="~{fragmentos :: menu}"></nav>
+
+<div class="container mt-4">
+    <h1>Pedidos</h1>
+    <a th:href="@{/invoice/new}" class="btn btn-primary mb-3">Nuevo pedido</a>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>N°</th>
+            <th>Tipo</th>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Documento</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pedido : ${invoiceList}">
+            <td th:text="${pedido.id}"></td>
+            <td th:text="${pedido.type}"></td>
+            <td th:text="${pedido.date}"></td>
+            <td th:text="${pedido.customerName}"></td>
+            <td th:text="${pedido.documentType} + ' ' + ${pedido.document}"></td>
+            <td th:text="'S/ ' + ${totales[pedido.id]}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

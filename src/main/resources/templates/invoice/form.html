@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Nuevo pedido</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}"/>
+</head>
+<body>
+<nav th:replace="~{fragmentos :: menu}"></nav>
+
+<div class="container mt-4" style="max-width: 800px;">
+    <h1>Nuevo pedido</h1>
+
+    <div class="alert alert-danger" th:if="${errorGlobal != null}" th:text="${errorGlobal}"></div>
+
+    <form method="post" th:action="@{/invoice/save}" th:object="${invoiceForm}">
+
+        <div class="mb-3">
+            <label class="form-label">Tipo de comprobante</label>
+            <select class="form-select" th:field="*{type}">
+                <option value="">Seleccione</option>
+                <option value="Factura">Factura</option>
+                <option value="Boleta">Boleta</option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
+            <div class="text-danger" th:if="${errorTipo != null}" th:text="${errorTipo}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Fecha</label>
+            <input type="date" class="form-control" th:field="*{date}"/>
+            <div class="text-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+            <div class="text-danger" th:if="${errorFecha != null}" th:text="${errorFecha}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Cliente</label>
+            <select class="form-select" th:field="*{customerId}">
+                <option value="">Seleccione</option>
+                <option th:each="cliente : ${customerList}"
+                        th:value="${cliente.id}"
+                        th:text="${cliente.name} + ' - ' + ${cliente.documentType} + ' ' + ${cliente.document}"></option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}"></div>
+            <div class="text-danger" th:if="${errorCliente != null}" th:text="${errorCliente}"></div>
+        </div>
+
+        <h5 class="mt-4">Productos</h5>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Producto</th>
+                <th style="width: 150px;">Cantidad</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="fila : ${filas}">
+                <td>
+                    <select name="productIds" class="form-select">
+                        <option value="">Seleccione</option>
+                        <option th:each="producto : ${productList}"
+                                th:value="${producto.id}"
+                                th:text="${producto.name} + ' - S/ ' + ${producto.price} + ' (stock: ' + ${producto.stock} + ')'"></option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="quantities" class="form-control"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <ul class="text-danger" th:if="${erroresDetalle != null}">
+            <li th:each="error : ${erroresDetalle}" th:text="${error}"></li>
+        </ul>
+
+        <button type="submit" class="btn btn-primary">Registrar pedido</button>
+        <a th:href="@{/invoice}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>
